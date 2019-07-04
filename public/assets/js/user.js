@@ -97,3 +97,51 @@ $('#usersBox').on('click','.delete' ,function(){
     })
     
 })
+
+//当切换全选input的时候，下面所有的input跟着改变状态
+$('#selectAll').on('change',function(){
+    console.log($(this).prop('checked'));
+    var bool = $(this).prop('checked');
+    $('#usersBox').find('.status').prop('checked',bool);
+    if(bool==true){
+        $('#deleteMany').show();
+    }else{
+        $('#deleteMany').hide();
+    }
+})
+//当tbody中的input全选中的时候，我们就让全选也是选中的状态
+$('#usersBox').on('change','.status',function(){
+    if($('#usersBox').find('.status').length==$('#usersBox').find('.status').filter(':checked').length){
+        $('#selectAll').prop('checked',true);
+    }else{
+        $('#selectAll').prop('checked',false);
+    }
+    if($('#usersBox').find('.status').filter(':checked').length>=2){
+        $('#deleteMany').show();
+    }else{
+        $('#deleteMany').hide();
+    }
+})
+
+$('#deleteMany').on('click',function(){
+    if(confirm('确定要删吗？')){
+    //找到所有选中的input
+    var selectAll = $('#usersBox').find('.status').filter(':checked');
+    var arr = [];
+    selectAll.each(function(index,element){
+        console.log($(element).attr('data-id'));
+        arr.push($(element).attr('data-id'));        
+    })
+    $.ajax({
+        type:'delete',//get或post
+        url:'/users/'+arr.join('-'),//请求的地址
+        data:{},//如果不需要传，则注释掉 请求的参数，a=1&b=2或{a:1,b:2}或者jq中的serialize方法，或者formData收集
+        // dataType:'json',
+        success:function(result){//成功的回调函数
+            // console.log(result)
+            location.reload();
+        }
+    })
+    }
+    
+})
