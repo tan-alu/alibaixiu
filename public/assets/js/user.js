@@ -123,6 +123,7 @@ $('#usersBox').on('change','.status',function(){
     }
 })
 
+//
 $('#deleteMany').on('click',function(){
     if(confirm('确定要删吗？')){
     //找到所有选中的input
@@ -134,7 +135,7 @@ $('#deleteMany').on('click',function(){
     })
     $.ajax({
         type:'delete',//get或post
-        url:'/users/'+arr.join('-'),//请求的地址
+        url:'/users/'+ arr.join('-'),//请求的地址
         data:{},//如果不需要传，则注释掉 请求的参数，a=1&b=2或{a:1,b:2}或者jq中的serialize方法，或者formData收集
         // dataType:'json',
         success:function(result){//成功的回调函数
@@ -145,3 +146,4 @@ $('#deleteMany').on('click',function(){
     }
     
 })
+//修改密码
