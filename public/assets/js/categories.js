@@ -81,5 +81,12 @@
   })
   // //全选名称，下面全部跟着选中
   // $('#nameAll').on('change',function(){
-  //   $(this).prop()
+  //   console.log($(this).prop('checked'));
+  //   var bool = $(this).prop('checked');
+  //   $('#usersBox').find('.status').prop('checked',bool);
+  //   if(bool==true){
+  //       $('#deleteMany').show();
+  //   }else{
+  //       $('#deleteMany').hide();
+  //   }
   // })
